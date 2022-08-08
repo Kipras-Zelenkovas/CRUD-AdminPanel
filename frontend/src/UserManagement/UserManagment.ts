@@ -1,14 +1,13 @@
 import axios from "axios"
 
-const getUsers = () => {
-    let data = axios.get('https://adminpanel.ddev.site/api/user/')
-                    .then((res) => {
-                        return res.data
-                    }).catch((error) => {
-                        return error.data
-                    })
-
-    return data
+const getUsers = (setData: any) => {
+    axios.get('https://adminpanel.ddev.site/api/user/')
+        .then((res) => {
+            console.log(res.data)
+            setData(res.data)
+        }).catch((error) => {
+            setData(error)
+        })
 }
 
 const getUser = (id: number) => {
