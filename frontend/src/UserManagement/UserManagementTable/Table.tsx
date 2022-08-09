@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
-import IData from "../../utils/Interfaces"
+import { UsersData } from "../../utils/Interfaces"
 import { getUsers } from "../UserManagment"
 
 const UserManagementTable = () => {
     
-    const [data, setData] = useState<IData[]>()
+    const [data, setData] = useState<UsersData[]>([])
 
     useEffect(() => {
         getUsers(setData)
     }, [])
     
-    if(data === undefined){
+    if(data.length === 0){
         return(
             <div>Loading...</div>
         )
@@ -18,7 +18,7 @@ const UserManagementTable = () => {
 
     return(
         <div>
-            {Object.values(data).map<any>((item: IData, index: number) => {
+            {data.map((item, index) => {
                 return <div key={index}>{item.name}</div>
             })}
         </div>

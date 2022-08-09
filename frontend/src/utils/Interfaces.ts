@@ -1,10 +1,16 @@
-interface IData{
+export interface UsersData{
     id: number;
     name: string;
     email: string;
-    updated_at: string;
-    created_at: string;
-    email_verified_at: any;
 }
 
-export default IData 
+export interface UsersChangeableData{
+    name: string;
+    email: string;
+    password: string;
+}
+
+export interface Routes{
+    name: string;
+    link: string;
+}
