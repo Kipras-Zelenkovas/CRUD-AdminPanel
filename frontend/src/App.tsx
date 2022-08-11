@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App w-screen h-screen relative bg-white">
       <NavigationBar></NavigationBar>
       <Routes>
         <Route path="/" element={<Home/>} />

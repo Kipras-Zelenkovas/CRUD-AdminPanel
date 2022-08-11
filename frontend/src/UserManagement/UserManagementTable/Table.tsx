@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { UsersData } from "../../utils/Interfaces"
 import { getUsers } from "../UserManagment"
 import axios from "axios"
+import TableHead from "./TableHead"
+import TableBody from "./TableBody"
 
 const UserManagementTable = () => {
     
@@ -23,10 +25,11 @@ const UserManagementTable = () => {
     }
 
     return(
-        <div>
-            {data.map((item, index) => {
-                return <div key={index}>{item.name}</div>
-            })}
+        <div className="absolute w-2/4 top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <table className="m-5 w-full text-left border-navy border-4">
+                <TableHead />
+                <TableBody data={data} />
+            </table>
         </div>
     )
 }

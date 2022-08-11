@@ -1,8 +1,12 @@
+import TableHead from "../UserManagementTable/TableHead"
+
 const Home = () => {
 
     return(
         <div>
-            Home
+            <table className="m-4">
+                <TableHead />
+            </table>
         </div>
     )
 
