@@ -11,17 +11,16 @@ const UserManagementTable = () => {
     
     const [data, setData] = useState<UsersData[]>([])
     const { search } = useLocation()
-    const searchparams = new URLSearchParams(search)
-
 
     useEffect(() => {
+        const searchParams = new URLSearchParams(search)
         const cancelToken = axios.CancelToken.source()
-        getUsers(setData, cancelToken, searchparams.get('id'))
+        getUsers(setData, cancelToken, searchParams.get('id'))
 
         return () => {
             cancelToken.cancel()
         }
-    }, [searchparams.get('id')])
+    }, [search])
     
     if(data.length === 0){
         return(
