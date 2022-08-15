@@ -5,6 +5,7 @@ module.exports = {
     "./src/UserManagement/UserManagementTable/Table.tsx",
     "./src/UserManagement/UserManagementTable/TableHead.tsx",
     "./src/UserManagement/UserManagementTable/TableBody.tsx",
+    "./src/UserManagement/UserManagementTable/TablePagination.tsx",
     "./src/App.tsx",
   ],
   theme: {
