@@ -61,6 +61,21 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Display specific amout of users
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function GetUsers($id)
+    {
+        try {
+            return response()->json(User::where('id', '>=', $id)->limit(10)->get(), 200);
+        } catch (\Exception $e) {
+            return response()->json('Can\'t get users', 500);
+        }
+    }
+
 
     /**
      * Update the specified resource in storage.
