@@ -20,4 +20,4 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::resource('user', UserController::class);
-Route::get('/users/{id}', [UserController::class, 'GetUsers'])->name('user.users');
+Route::get('users', [UserController::class, 'GetUsers'])->name('user.users');

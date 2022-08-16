@@ -64,13 +64,16 @@ class UserController extends Controller
     /**
      * Display specific amout of users
      * 
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function GetUsers($id)
+    public function GetUsers(Request $request)
     {
         try {
-            return response()->json(User::where('id', '>=', $id)->limit(10)->get(), 200);
+
+            $number = $request->number;
+
+            return response()->json(User::paginate($number), 200);
         } catch (\Exception $e) {
             return response()->json('Can\'t get users', 500);
         }
