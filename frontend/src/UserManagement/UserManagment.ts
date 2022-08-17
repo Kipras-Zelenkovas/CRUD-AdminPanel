@@ -1,8 +1,8 @@
 import axios, { CancelTokenSource } from "axios"
 import { UsersChangeableData } from "../utils/Interfaces"
 
-const getUsers = (setData: Function, cancelToken: CancelTokenSource, id: string | null) => {
-    axios.get('https://adminpanel.ddev.site/api/users/' + id, {cancelToken: cancelToken.token})
+const getUsers = (setData: Function, cancelToken: CancelTokenSource, page: string | null) => {
+    axios.get('https://adminpanel.ddev.site/api/users?page=' + page, {cancelToken: cancelToken.token})
         .then((res) => {
             console.log(res.data)
             setData(res.data)

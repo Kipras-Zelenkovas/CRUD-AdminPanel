@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
+import { PaginationData } from "../../utils/Interfaces"
 
-const TablePagination = ({prev, next, items}: any) => {
+const TablePagination = ({page, last}: PaginationData) => {
     return( 
         <div className="flex justify-end">
-            <Link to={"/users?id=" + (prev-10)} className={`${prev-1 <= 0 ? 'hidden' : ''} p-2 text-md m-1 bg-smoked text-white`}>Prev</Link>
-            <Link to={"/users?id=" + (next+1)} className={`${items < 10 ? 'hidden' : ''} p-2 text-md m-1 bg-smoked text-white`}>Next</Link>
+            <Link to={'/users?page=' + (page-1)} className={`${page-1 < 0 ? 'hidden' : ''} p-2 text-md m-1 bg-smoked text-white`}>Prev</Link>
+            <Link to={'/users?page=' + (page+1)} className={`${page+1 > last ? 'hidden' : ''} p-2 text-md m-1 bg-smoked text-white`}>Next</Link>
         </div>
     )
 }

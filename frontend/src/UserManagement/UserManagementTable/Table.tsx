@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { UsersData } from "../../utils/Interfaces"
+import { TableData } from "../../utils/Interfaces"
 import { getUsers } from "../UserManagment"
 import axios from "axios"
 import TableHead from "./TableHead"
@@ -9,20 +9,21 @@ import { useLocation } from "react-router-dom"
 
 const UserManagementTable = () => {
     
-    const [data, setData] = useState<UsersData[]>([])
+    const [data, setData] = useState<TableData>()
     const { search } = useLocation()
 
     useEffect(() => {
         const searchParams = new URLSearchParams(search)
         const cancelToken = axios.CancelToken.source()
-        getUsers(setData, cancelToken, searchParams.get('id'))
+        getUsers(setData, cancelToken, searchParams.get('page'))
+        console.log()
 
         return () => {
             cancelToken.cancel()
         }
     }, [search])
     
-    if(data.length === 0){
+    if(data === undefined){
         return(
             <div>Loading...</div>
         )
@@ -32,9 +33,9 @@ const UserManagementTable = () => {
         <div className="absolute w-2/4 left-1/4">
             <table className="m-5 w-full text-left border-navy border-4">
                 <TableHead />
-                <TableBody data={data} />
+                <TableBody data={data.data} />
             </table>
-            <TablePagination prev={data[0].id} next={data[data.length - 1].id} items={data.length}/>
+            <TablePagination page={data.current_page} last={data.last_page} />
         </div>
     )
 }
