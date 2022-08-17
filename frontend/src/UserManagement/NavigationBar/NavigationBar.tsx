@@ -14,7 +14,12 @@ const NavigationBar = () => {
         {
             name: 'Users',
             link: '/users?page=1'
-        }/*,
+        },
+        {
+            name: 'Add User',
+            link: '/add/user'
+        },
+        /*,
         {
             name: 'Users',
             link: '/users'

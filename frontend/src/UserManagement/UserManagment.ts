@@ -29,28 +29,24 @@ const getUser = (id: number, setData: Function, cancelToken: CancelTokenSource) 
         })
 }
 
-const createUser = (users_data: UsersChangeableData, cancelToken: CancelTokenSource) => {
+const createUser = (users_data: UsersChangeableData) => {
     axios.post('https://adminpanel.ddev.site/api/user', {
             name: users_data.name,
             email: users_data.email,
             password: users_data.password
-        }, {cancelToken: cancelToken.token}).then((res) => {
-            return res.data
+        }).then((res) => {
+            console.log(res.data)
         }).catch((err) => {
-            if(axios.isCancel(err)){
-                console.log('Canceled')
-            }else{
-                console.log(err)
-            }
+            console.log(err)
         })
 }
 
-const updateUser = (id: number, users_data: UsersChangeableData, cancelToken: CancelTokenSource) => {
+const updateUser = (id: number, users_data: UsersChangeableData) => {
     axios.put('https://adminpanel.ddev.site/api/user/' + id, {
             name: users_data.name,
             email: users_data.email,
             password: users_data.password
-        }, {cancelToken: cancelToken.token}).then((res) => {
+        }).then((res) => {
             return res.data
         }).catch((err) => {
             if(axios.isCancel(err)){
@@ -62,8 +58,8 @@ const updateUser = (id: number, users_data: UsersChangeableData, cancelToken: Ca
 
 }
 
-const deleteUser = (id: number, cancelToken: CancelTokenSource) => {
-    axios.delete('https://adminpanel.ddev.site/api/user/' + id, {cancelToken: cancelToken.token})
+const deleteUser = (id: number) => {
+    axios.delete('https://adminpanel.ddev.site/api/user/' + id)
         .then((res) => {
             return res.data
         }).catch((err) => {
