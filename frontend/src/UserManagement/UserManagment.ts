@@ -1,8 +1,11 @@
 import axios, { CancelTokenSource } from "axios"
-import { UsersChangeableData } from "../utils/Interfaces"
+import { NavigateFunction } from "react-router-dom"
+import { PutPostUsersData } from "../utils/Interfaces"
+
+const url = 'https://adminpanel.ddev.site/api/user'
 
 const getUsers = (setData: Function, cancelToken: CancelTokenSource, page: string | null) => {
-    axios.get('https://adminpanel.ddev.site/api/users?page=' + page, {cancelToken: cancelToken.token})
+    axios.get(url + 's?page=' + page, {cancelToken: cancelToken.token})
         .then((res) => {
             console.log(res.data)
             setData(res.data)
@@ -15,7 +18,7 @@ const getUsers = (setData: Function, cancelToken: CancelTokenSource, page: strin
         })
 }
 
-const getUser = (id: number, setData: Function, cancelToken: CancelTokenSource) => {
+const getUser = (id: string | null, setData: Function, cancelToken: CancelTokenSource) => {
     axios.get('https://adminpanel.ddev.site/api/user/' + id, {cancelToken: cancelToken.token})
         .then((res) => {
             console.log(res.data)
@@ -29,25 +32,33 @@ const getUser = (id: number, setData: Function, cancelToken: CancelTokenSource) 
         })
 }
 
-const createUser = (users_data: UsersChangeableData) => {
-    axios.post('https://adminpanel.ddev.site/api/user', {
+const createUser = (users_data: PutPostUsersData, navigate: NavigateFunction) => {
+    axios.post(url, {
             name: users_data.name,
             email: users_data.email,
             password: users_data.password
         }).then((res) => {
             console.log(res.data)
+            /**
+             * Temporary navigation after creating user
+             */
+            navigate('/users?page=1')
         }).catch((err) => {
             console.log(err)
         })
 }
 
-const updateUser = (id: number, users_data: UsersChangeableData) => {
-    axios.put('https://adminpanel.ddev.site/api/user/' + id, {
+const updateUser = (users_data: PutPostUsersData, navigate: NavigateFunction) => {
+    axios.put(url + '/' + users_data.id, {
             name: users_data.name,
             email: users_data.email,
             password: users_data.password
         }).then((res) => {
-            return res.data
+            console.log(res.data)
+            /**
+             * Temporary navigation after updating user
+             */
+            navigate('/users?page=1')
         }).catch((err) => {
             if(axios.isCancel(err)){
                 console.log('Canceled')
@@ -59,7 +70,7 @@ const updateUser = (id: number, users_data: UsersChangeableData) => {
 }
 
 const deleteUser = (id: number) => {
-    axios.delete('https://adminpanel.ddev.site/api/user/' + id)
+    axios.delete(url + '/' + id)
         .then((res) => {
             return res.data
         }).catch((err) => {

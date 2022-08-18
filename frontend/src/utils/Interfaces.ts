@@ -31,7 +31,8 @@ export interface PaginationData{
     last: number;
 }
 
-export interface UsersChangeableData{
+export interface PutPostUsersData{
+    id?: number;
     name: string;
     email: string;
     password: string;
