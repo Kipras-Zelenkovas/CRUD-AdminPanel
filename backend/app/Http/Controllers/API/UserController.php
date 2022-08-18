@@ -55,7 +55,7 @@ class UserController extends Controller
     public function show($id)
     {
         try {
-            return response()->json(User::find($id)->get(), 200);
+            return response()->json(User::find($id), 200);
         } catch (\Exception $e) {
             return response()->json('Not ok', 503);
         }
