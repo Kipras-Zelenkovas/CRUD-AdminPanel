@@ -4,6 +4,7 @@ import NavigationBar from './UserManagement/NavigationBar/NavigationBar';
 import UserManagementTable from './UserManagement/UserManagementTable/Table';
 import { Routes, Route } from "react-router-dom";
 import AddUser from './UserManagement/AddUser/AddUser';
+import UpdateUser from './UserManagement/UpdateUser/UpdateUser';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/users" element={<UserManagementTable/>} />
         <Route path="/add/user" element={<AddUser />}/>
+        <Route path="/update/user" element={<UpdateUser />} />
       </Routes>
     </div>
   );

@@ -13,8 +13,7 @@ const AddUser = () => {
             password: '',
         },
         onSubmit: values => {
-           createUser(values)
-            navigate('/users?page=1')
+           createUser(values, navigate)
         }
     })
 
