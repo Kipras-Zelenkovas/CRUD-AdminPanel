@@ -26,9 +26,9 @@ export interface TableData{
     total: number;
 }
 
-export interface PaginationData{
-    page: number;
-    last: number;
+export interface PagingData{
+    current_page: number;
+    last_page: number;
 }
 
 export interface PutPostUsersData{

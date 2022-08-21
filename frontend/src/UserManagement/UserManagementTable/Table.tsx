@@ -35,7 +35,7 @@ const UserManagementTable = () => {
                 <TableHead />
                 <TableBody data={data.data} />
             </table>
-            <TablePagination page={data.current_page} last={data.last_page} />
+            <TablePagination current_page={data.current_page} last_page={data.last_page} />
         </div>
     )
 }
