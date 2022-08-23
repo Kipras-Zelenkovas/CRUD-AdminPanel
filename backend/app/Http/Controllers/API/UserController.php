@@ -62,7 +62,7 @@ class UserController extends Controller
     }
 
     /**
-     * Display specific amout of users
+     * Display specific quantity of users
      * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -71,11 +71,38 @@ class UserController extends Controller
     {
         try {
 
-            $number = $request->number;
+            $number = $request->number ? $request->number : 10;
 
             return response()->json(User::paginate($number), 200);
         } catch (\Exception $e) {
             return response()->json('Can\'t get users', 500);
+        }
+    }
+
+    /**
+     * Display specific quantity of users
+     * It can be sorted asc or desc by any parameter example: name, email, etc. 
+     * If none of query parameters given it gets users by default parameter - id, ascending.
+     * 
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function GetUsersSorted(Request $request)
+    {
+
+        try {
+
+            $asc = $request->asc === 'true' ? true : ($request->asc === 'false' ? false : true);
+            $param = $request->param ? $request->param : 'id';
+            $number = $request->number ? $request->number : 10;
+
+            if ($asc) {
+                return response()->json(User::orderBy($param, 'asc')->paginate($number));
+            } else {
+                return response()->json(User::orderBy($param, 'desc')->paginate($number));
+            }
+        } catch (\Exception $e) {
+            return response()->json('can\'t get users', 500);
         }
     }
 
